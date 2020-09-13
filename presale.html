@@ -101,7 +101,7 @@ let MyContract = await tronWeb.contract().at(contractAddress);
 
     var tosend = parseFloat(document.getElementsByName('ETH')[0].value*1000000);
 
-if(tosend>=100000000){
+if(tosend>=10000000){
 	
   let contractInstance = await tronWeb.contract().at(contractAddress);
 	
@@ -113,7 +113,7 @@ if(tosend>=100000000){
       
 let result = await contractInstance.buy().send(args);
       start();
-} else alert('Minimum Investment is 100 TRX');
+} else alert('Minimum Investment is 10 TRX');
 } else alert ('Please unlock your Tron Wallet');
 }
       
