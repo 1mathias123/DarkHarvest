@@ -27,9 +27,9 @@
                         <div class="card-body">
                             <h1 class="display-4 text-center card-title"><img src="assets/img/1044722.png" style="width: 52px;"><br></h1>
                             <h1 class="text-center"><span><strong>0.00000000</strong><br></span></h1>
-                            <h6 class="text-center"><strong>Buyprice</strong>&nbsp;<span><strong>500Trx per 1 DMH</strong><br></span></h6>
+                            <h6 class="text-center"><strong>Price 1 DMH</strong>&nbsp;<span id="price"><strong>X</strong><br></span></h6>
                             <h6 class="text-center"><strong>DMH Remaining&nbsp;</strong><span id="available"><strong>0.00000000</strong><br></span></h6>
-                            <p class="text-center" style="margin-bottom: 19px;"><input type="text" class="inputBuy text-center"  name="TRONTOINPUT" style="height: 44px;padding-top: 0px;"><button onclick="invest()" class="btn btn-primary button" type="button" style="height: 44px;margin-left: 5px;"><strong>Buy</strong></button></p>
+                            <p class="text-center" style="margin-bottom: 19px;"><input type="text" name="ETH" class="inputBuy text-center" style="height: 44px;padding-top: 0px;"><button onclick="invest()" class="btn btn-primary button" type="button" style="height: 44px;margin-left: 5px;"><strong>Buy</strong></button></p>
                             <p class="text-center"></p>
                         </div>
                     </div>
@@ -39,13 +39,13 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script>
+<script>
 var started=0;	
 
 
 function getUrlVars() {
 			var vars = {};
-			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {    // Ref if its added unlikely it will be
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
 				vars[key] = value;
 			});
 	return vars;
@@ -63,7 +63,7 @@ function round(num) {
 }
   
 
-var contractAddress='TA4nbvaJWTpWjbgXVtdmP8od9qt4jXdUkE';    // contract for presale
+var contractAddress='TA4nbvaJWTpWjbgXVtdmP8od9qt4jXdUkE';
 
 
 
@@ -82,20 +82,24 @@ let MyContract = await tronWeb.contract().at(contractAddress);
 
   
    
+  let _price= await MyContract.tokenPrice().call(); 
+    document.getElementById("price").innerHTML=roundToFour(_price/1000000);
+
   
-  let _matterbalance= await MyContract.getTokenBalance().call(); 
-    document.getElementById("available").innerHTML=roundToTwo(_matterbalance/1000000);
+  
+  let _candybalance= await MyContract.getTokenBalance().call(); 
+    document.getElementById("available").innerHTML=roundToTwo(_candybalance/1000000000000000000);
 
 
-
+ 
 }
     
    async function invest() {
 	if(started>0){	
 
-    var tosend = parseFloat(document.getElementsByName('TRONTOINPUT')[0].value*1000000);
+    var tosend = parseFloat(document.getElementsByName('ETH')[0].value*1000000);
 
-if(tosend>=10000000){
+if(tosend>=100000000){
 	
   let contractInstance = await tronWeb.contract().at(contractAddress);
 	
@@ -107,7 +111,7 @@ if(tosend>=10000000){
       
 let result = await contractInstance.buy().send(args);
       start();
-} else alert('Minimum Investment is 50 TRX');
+} else alert('Minimum Investment is 100 TRX');
 } else alert ('Please unlock your Tron Wallet');
 }
       
