@@ -81,10 +81,10 @@ async function start() {
 started=1;
   
 let MyContract = await tronWeb.contract().at(contractAddress);
-let token = await tronWeb.contract().at(contractAddress2);
+let Token = await tronWeb.contract().at(contractAddress2);
 
 	
-  let _balof= await MyContract.balanceOf(myaddress, ).call(); 
+  let _balof= await Token.balanceOf(myaddress).call(); 
     document.getElementById("balof").innerHTML=roundToFour(_price/1000000);
   
    
