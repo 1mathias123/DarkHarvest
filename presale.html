@@ -27,9 +27,9 @@
                         <div class="card-body">
                             <h1 class="display-4 text-center card-title"><img src="assets/img/1044722.png" style="width: 52px;"><br></h1>
                             <h1 class="text-center"><span><strong>0.00000000</strong><br></span></h1>
-                            <h6 class="text-center"><strong>Buyprice</strong>&nbsp;<span><strong>0.00000000</strong><br></span></h6>
-                            <h6 class="text-center"><strong>DMH Sold so far&nbsp;</strong><span><strong>0.00000000</strong><br></span></h6>
-                            <p class="text-center" style="margin-bottom: 19px;"><input type="text" class="inputBuy text-center" style="height: 44px;padding-top: 0px;"><button class="btn btn-primary button" type="button" style="height: 44px;margin-left: 5px;"><strong>Buy</strong></button></p>
+                            <h6 class="text-center"><strong>Buyprice</strong>&nbsp;<span><strong>500Trx per 1 DMH</strong><br></span></h6>
+                            <h6 class="text-center"><strong>DMH Remaining&nbsp;</strong><span id="available"><strong>0.00000000</strong><br></span></h6>
+                            <p class="text-center" style="margin-bottom: 19px;"><input type="text" class="inputBuy text-center"  name="TRONTOINPUT" style="height: 44px;padding-top: 0px;"><button class="btn btn-primary button" type="button" style="height: 44px;margin-left: 5px;"><strong>Buy</strong></button></p>
                             <p class="text-center"></p>
                         </div>
                     </div>
@@ -39,6 +39,104 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+var started=0;	
+
+
+function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {    // Ref if its added unlikely it will be
+				vars[key] = value;
+			});
+	return vars;
+}
+	
+
+function roundToFour(num) {
+	return +(Math.floor(num + "e+4") + "e-4");
+}
+function roundToTwo(num) {
+	return +(Math.floor(num + "e+2") + "e-2");
+}
+function round(num) {
+	return +(Math.floor(num + "e+0") + "e-0");
+}
+  
+
+var contractAddress='TA4nbvaJWTpWjbgXVtdmP8od9qt4jXdUkE';    // contract for presale
+
+
+
+  var toinvest=0;
+  var myaddress;
+
+
+
+
+    
+async function start() {
+started=1;
+  
+let MyContract = await tronWeb.contract().at(contractAddress);
+ 
+
+  
+   
+  
+  let _matterbalance= await MyContract.getTokenBalance().call(); 
+    document.getElementById("available").innerHTML=roundToTwo(_matterbalance/1000000);
+
+
+
+}
+    
+   async function invest() {
+	if(started>0){	
+
+    var tosend = parseFloat(document.getElementsByName('TRONTOINPUT')[0].value*1000000);
+
+if(tosend>=10000000){
+	
+  let contractInstance = await tronWeb.contract().at(contractAddress);
+	
+	let args = {
+		callValue: window.tronWeb.toHex(round(tosend)),
+      	feeLimit: 10000000,
+		shouldPollResponse: true
+	};
+      
+let result = await contractInstance.buy().send(args);
+      start();
+} else alert('Minimum Investment is 50 TRX');
+} else alert ('Please unlock your Tron Wallet');
+}
+      
+    
+ 
+      
+    
+   
+    
+    
+    
+    
+accountInterval2 = setInterval(function () {
+  if(myaddress==false&&tronWeb.defaultAddress.base58 != false) location.reload();
+    
+    if(myaddress!=tronWeb.defaultAddress.base58){
+        myaddress = tronWeb.defaultAddress.base58;
+			
+}
+  
+	if (typeof window.tronWeb !== 'undefined'){		
+
+  if(tronWeb.defaultAddress.base58 != false){
+document.getElementById("installmetamask").style.display = "none";
+  console.log('started');
+   start();
+}}
+}, 2000);   
+  </script>
 </body>
 
 </html>
