@@ -1,12 +1,12 @@
 //contracts addresses
-const tokenAddress = 'TYiMBvrbmvPuxsBUsw8R1jH2U8cviCqit2'
+const tokenAddress = 'TYiMBvrbmvPuxsBUsw8R1jH2U8cviCqit2'  // Stakeing Token Address
 
-const dhmAddress = 'THpF8H3QQBnNVhBXHTPaYvuwSGARYuBs34'
+const dhmAddress = 'TCpVwvWNNwnw7geVr3HcKhHTepKpcGsuCL'  //Dark Matter Token Address
 
-const stakingAddress = 'TEy7WGNM73zU2cpXA2GCku8h2vmpBWhSvx'
+const stakingAddress = 'TEy7WGNM73zU2cpXA2GCku8h2vmpBWhSvx'  // Pool Addresss
 
-let tokenInstance = undefined
-let dhmInstance = undefined
+let tokenInstance = undefined   TCpVwvWNNwnw7geVr3HcKhHTepKpcGsuCL
+let dhmInstance = undefined     TEJmS1UcMFwfqG5DKCUNzcFxYAafFJd9X4
 let stakingInstance = undefined
 
 //rounding functions
