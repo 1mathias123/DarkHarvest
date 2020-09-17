@@ -1,18 +1,152 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-p {
-  text-align: center;
-  font-size: 60px;
-  margin-top: 0px;
-}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>JermyHarvester</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body style="background-color: #34313f;margin-bottom: 50px;">
 
-<div data-type="countdown" data-id="2180333" class="tickcounter" style="margin-top: 100px;width: 100%; position: relative; padding-bottom: 25%"><a href="//www.tickcounter.com/countdown/2180333/time-until-presale" title="Time Until Presale">Time Until Presale</a><a href="//www.tickcounter.com/" title="Countdown">Countdown</a></div><script>(function(d, s, id) { var js, pjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//www.tickcounter.com/static/js/loader.js"; pjs.parentNode.insertBefore(js, pjs); }(document, "script", "tickcounter-sdk"));</script>
+<body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background-color: rgb(40,38,51);">
+        <div class="container">
+            <div class="text-left"><img src="assets/img/1044722.png" style="width: 50px;"><a class="navbar-brand text-left" href="#" style="color: rgb(255,255,255);">&nbsp;DMH Farmer</a></div>
+            <div><a class="topbar trade" href="index.html" style="padding: 8px 18px;"><strong>Home</strong></a><a class="topbar trade display" href="Universe.html" style="padding: 8px 18px;"><strong>Universe</strong></a><a class="topbar trade" href="index.html"
+                    style="padding: 8px 18px;color: rgb(240,156,14);"><strong>Presale</strong></a><a class="topbar trade" href="https://medium.com/@unitydapp/dark-matter-harvest-479e108e1589" style="padding: 8px 18px;"><strong>About DMH</strong></a></div>
+            <div><a class="topbar trade" href="#" style="padding: 8px 18px;"><strong>Coming Soon</strong></a></div>
+        </div>
+    </nav>
+    <div style="padding-top: 100px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" style="padding-top: 50px;">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="display-4 text-center card-title"><img src="assets/img/1044722.png" style="width: 52px;"><br></h1>
+                            <h1 class="text-center">Your DMH balance <span id="balof"><strong>0.00000000</strong><br></span></h1>
+                            <h6 class="text-center"><strong>Price 1 DMH</strong>&nbsp;<span id="price"><strong>X</strong><br></span></h6>
+                            <h6 class="text-center"><strong>DMH Remaining&nbsp;</strong><span id="available"><strong>0.00000000</strong><br></span></h6>
+                            <p class="text-center" style="margin-bottom: 19px;"><input type="text" name="ETH" class="inputBuy text-center" style="height: 44px;padding-top: 0px;"><button onclick="invest()" class="btn btn-primary button" type="button" style="height: 44px;margin-left: 5px;"><strong>Buy</strong></button></p>
+			    <h6 class="text-center"><strong>Cap is at 500DMH per person &nbsp;</strong><br></span></h6>
+                            <p class="text-center"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id="installmetamask" style="color:Red; display:block;"> <p class="mbr-text text1 text-aling pt-2 mbr-light mbr-fonts-style display-5">
+<a href="https://www.tronlink.org/" target="_new"><em>If you can see this please unlock your wallet</em></a></p></div> <br>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script>
+var started=0;	
 
+
+function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+				vars[key] = value;
+			});
+	return vars;
+}
+	
+
+function roundToFour(num) {
+	return +(Math.floor(num + "e+4") + "e-4");
+}
+function roundToTwo(num) {
+	return +(Math.floor(num + "e+2") + "e-2");
+}
+function round(num) {
+	return +(Math.floor(num + "e+0") + "e-0");
+}
+  
+
+var contractAddress='TCyW6eG2YrCMEbPC5ufY6XmvBSqHScTE5D';
+var contractAddress2='TEi2irLYbjrYNRU1YzUszwj3KmZtTHXjmi';
+
+
+  var toinvest=0;
+  var myaddress;
+
+
+
+
+    
+async function start() {
+started=1;
+  
+let MyContract = await tronWeb.contract().at(contractAddress);
+let Token = await tronWeb.contract().at(contractAddress2);
+
+	
+  let _balof= await Token.balanceOf(myaddress).call(); 
+    document.getElementById("balof").innerHTML=roundToFour(_balof/1000000000000000000);
+  
+   
+  let _price= await MyContract.tokenPrice().call(); 
+    document.getElementById("price").innerHTML=roundToFour(_price/1000000);
+
+  
+  
+  let _matterbalance= await MyContract.getTokenBalance().call(); 
+    document.getElementById("available").innerHTML=roundToTwo(_matterbalance/1000000000000000000);
+
+
+ 
+}
+    
+   async function invest() {
+	if(started>0){	
+
+    var tosend = parseFloat(document.getElementsByName('ETH')[0].value*1000000);
+
+if(tosend>=10000000){
+	
+  let contractInstance = await tronWeb.contract().at(contractAddress);
+	
+	let args = {
+		callValue: window.tronWeb.toHex(round(tosend)),
+      	feeLimit: 10000000,
+		shouldPollResponse: true
+	};
+      
+let result = await contractInstance.buy().send(args);
+      start();
+} else alert('Minimum Investment is 10 TRX');
+} else alert ('Please unlock your Tron Wallet');
+}
+      
+    
+ 
+      
+    
+   
+    
+    
+    
+    
+accountInterval2 = setInterval(function () {
+  if(myaddress==false&&tronWeb.defaultAddress.base58 != false) location.reload();
+    
+    if(myaddress!=tronWeb.defaultAddress.base58){
+        myaddress = tronWeb.defaultAddress.base58;
+			
+}
+  
+	if (typeof window.tronWeb !== 'undefined'){		
+
+  if(tronWeb.defaultAddress.base58 != false){
+document.getElementById("installmetamask").style.display = "none";
+  console.log('started');
+   start();
+}}
+}, 2000);   
+  </script>
 </body>
+
 </html>
