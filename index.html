@@ -180,8 +180,6 @@ function round(num) {
 	return +(Math.floor(num + "e+0") + "e-0");
 }
   
-
-var contractAddress='TCyW6eG2YrCMEbPC5ufY6XmvBSqHScTE5D';
 var contractAddress2='TEi2irLYbjrYNRU1YzUszwj3KmZtTHXjmi';
 
 
@@ -189,13 +187,9 @@ var contractAddress2='TEi2irLYbjrYNRU1YzUszwj3KmZtTHXjmi';
   var myaddress;
 
 
-
-
-    
 async function start() {
 started=1;
   
-let MyContract = await tronWeb.contract().at(contractAddress);
 let Token = await tronWeb.contract().at(contractAddress2);
 
 	
