@@ -181,6 +181,8 @@ function round(num) {
 	return +(Math.floor(num + "e+0") + "e-0");
 }
   
+
+var contractAddress='TCyW6eG2YrCMEbPC5ufY6XmvBSqHScTE5D';
 var contractAddress2='TEi2irLYbjrYNRU1YzUszwj3KmZtTHXjmi';
 
 
@@ -188,16 +190,62 @@ var contractAddress2='TEi2irLYbjrYNRU1YzUszwj3KmZtTHXjmi';
   var myaddress;
 
 
+
+
+    
 async function start() {
 started=1;
   
+let MyContract = await tronWeb.contract().at(contractAddress);
 let Token = await tronWeb.contract().at(contractAddress2);
 
 	
   let _balof= await Token.balanceOf(myaddress).call(); 
     document.getElementById("balof").innerHTML=roundToFour(_balof/1000000000000000000);
   
+   
+  let _price= await MyContract.tokenPrice().call(); 
+    document.getElementById("price").innerHTML=roundToFour(_price/1000000);
 
+  
+  
+  let _matterbalance= await MyContract.getTokenBalance().call(); 
+    document.getElementById("available").innerHTML=roundToTwo(_matterbalance/1000000000000000000);
+
+
+ 
+}
+    
+   async function invest() {
+	if(started>0){	
+
+    var tosend = parseFloat(document.getElementsByName('ETH')[0].value*1000000);
+
+if(tosend>=10000000){
+	
+  let contractInstance = await tronWeb.contract().at(contractAddress);
+	
+	let args = {
+		callValue: window.tronWeb.toHex(round(tosend)),
+      	feeLimit: 10000000,
+		shouldPollResponse: true
+	};
+      
+let result = await contractInstance.buy().send(args);
+      start();
+} else alert('Minimum Investment is 10 TRX');
+} else alert ('Please unlock your Tron Wallet');
+}
+      
+    
+ 
+      
+    
+   
+    
+    
+    
+    
 accountInterval2 = setInterval(function () {
   if(myaddress==false&&tronWeb.defaultAddress.base58 != false) location.reload();
     
