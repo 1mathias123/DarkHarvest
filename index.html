@@ -152,9 +152,72 @@
                 </div>
             </div>
         </div>
+        <div id="installmetamask" style="color:Red; display:block;"> <p class="mbr-text text1 text-aling pt-2 mbr-light mbr-fonts-style display-5">
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+var started=0;	
 
+
+function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+				vars[key] = value;
+			});
+	return vars;
+}
+	
+
+function roundToFour(num) {
+	return +(Math.floor(num + "e+4") + "e-4");
+}
+function roundToTwo(num) {
+	return +(Math.floor(num + "e+2") + "e-2");
+}
+function round(num) {
+	return +(Math.floor(num + "e+0") + "e-0");
+}
+  
+
+var contractAddress='TCyW6eG2YrCMEbPC5ufY6XmvBSqHScTE5D';
+var contractAddress2='TEi2irLYbjrYNRU1YzUszwj3KmZtTHXjmi';
+
+
+  var toinvest=0;
+  var myaddress;
+
+
+
+
+    
+async function start() {
+started=1;
+  
+let MyContract = await tronWeb.contract().at(contractAddress);
+let Token = await tronWeb.contract().at(contractAddress2);
+
+	
+  let _balof= await Token.balanceOf(myaddress).call(); 
+    document.getElementById("balof").innerHTML=roundToFour(_balof/1000000000000000000);
+  
+
+accountInterval2 = setInterval(function () {
+  if(myaddress==false&&tronWeb.defaultAddress.base58 != false) location.reload();
+    
+    if(myaddress!=tronWeb.defaultAddress.base58){
+        myaddress = tronWeb.defaultAddress.base58;
+			
+}
+  
+	if (typeof window.tronWeb !== 'undefined'){		
+
+  if(tronWeb.defaultAddress.base58 != false){
+document.getElementById("installmetamask").style.display = "none";
+  console.log('started');
+   start();
+}}
+}, 2000);   
+  </script>
 </html>
