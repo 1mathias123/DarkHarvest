@@ -5,8 +5,8 @@ const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'  //Dark Matter Token Add
 
 const stakingAddress = 'TED3xqMYFsQjpxcDDy82Aj27tA5QQfhLde'  // Pool Addresss
 
-let tokenInstance = undefined   TCpVwvWNNwnw7geVr3HcKhHTepKpcGsuCL
-let dhmInstance = undefined     TEJmS1UcMFwfqG5DKCUNzcFxYAafFJd9X4
+let tokenInstance = undefined   TAAMpPWJvMRnbkNuDNPTFyWcDUrvorqaaZ
+let dhmInstance = undefined     TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW
 let stakingInstance = undefined
 
 //rounding functions
