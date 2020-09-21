@@ -1,9 +1,9 @@
 //contracts addresses
-const tokenAddress = 'TYiMBvrbmvPuxsBUsw8R1jH2U8cviCqit2'  // Stakeing Token Address
+const tokenAddress = 'TAAMpPWJvMRnbkNuDNPTFyWcDUrvorqaaZ'  // Stakeing Token Address
 
-const dhmAddress = 'TCpVwvWNNwnw7geVr3HcKhHTepKpcGsuCL'  //Dark Matter Token Address
+const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'  //Dark Matter Token Address
 
-const stakingAddress = 'TEy7WGNM73zU2cpXA2GCku8h2vmpBWhSvx'  // Pool Addresss
+const stakingAddress = 'TED3xqMYFsQjpxcDDy82Aj27tA5QQfhLde'  // Pool Addresss
 
 let tokenInstance = undefined   TCpVwvWNNwnw7geVr3HcKhHTepKpcGsuCL
 let dhmInstance = undefined     TEJmS1UcMFwfqG5DKCUNzcFxYAafFJd9X4
