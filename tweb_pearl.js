@@ -3,7 +3,7 @@ const tokenAddress = 'TJCX1n9xGZAh4tJWUapshqWTQvaiq9yC3z'
 
 const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'
 
-const stakingAddress = 'TEy7WGNM73zU2cpXA2GCku8h2vmpBWhSvx'
+const stakingAddress = 'TJSK1HHJJ5Sf2v91RHW9TTPu7JF5oikQg5'
 
 let tokenInstance = undefined
 let dhmInstance = undefined
