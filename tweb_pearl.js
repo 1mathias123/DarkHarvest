@@ -1,12 +1,12 @@
 //contracts addresses
-const tokenAddress = 'TAAMpPWJvMRnbkNuDNPTFyWcDUrvorqaaZ'  // Stakeing Token Address
+const tokenAddress = 'TJCX1n9xGZAh4tJWUapshqWTQvaiq9yC3z'
 
-const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'  //Dark Matter Token Address
+const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'
 
-const stakingAddress = 'TED3xqMYFsQjpxcDDy82Aj27tA5QQfhLde'  // Pool Addresss
+const stakingAddress = 'TEy7WGNM73zU2cpXA2GCku8h2vmpBWhSvx'
 
-let tokenInstance = undefined   TAAMpPWJvMRnbkNuDNPTFyWcDUrvorqaaZ
-let dhmInstance = undefined     TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW
+let tokenInstance = undefined
+let dhmInstance = undefined
 let stakingInstance = undefined
 
 //rounding functions
@@ -45,9 +45,9 @@ setInterval(()=>{
 
 //functions
 async function updateTokenBalance() {
-  tokenInstance = await tronWeb.contract().at(tokenAddress)
-  const tokenBalance = await tokenInstance.balanceOf(tronWeb.defaultAddress.base58).call()
-  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance._hex, 16))
+const tokenBalance = await tronWeb.transactionBuilder.triggerConstantContract(tronWeb.address.toHex(tokenAddress), "balanceOf(address)", {},
+                           [{type:'address',value:tronWeb.defaultAddress.hex}], tronWeb.defaultAddress.hex)
+  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16))
 }
 
 async function updateStakedBalance() {
@@ -63,10 +63,16 @@ async function updateRewards() {
 }
 
 async function stake() {
-  tokenInstance = await tronWeb.contract().at(tokenAddress)
   stakingInstance = await tronWeb.contract().at(stakingAddress)
   const amount = document.getElementById('tokenAmount').value
-  await tokenInstance.approve(stakingAddress, amount+1).send()
+  const options = {
+        feeLimit:100000000,
+        callValue:0,
+  }
+  const transaction = await tronWeb.transactionBuilder.triggerSmartContract(tronWeb.address.toHex(tokenAddress), "approve(address,uint256)", options,
+                      [{type:'address',value:tronWeb.address.toHex(stakingAddress)},{type:'uint256',value:amount}],tronWeb.defaultAddress.hex)
+  const rawTransaction = await tronWeb.trx.sign(transaction.transaction)
+  await tronWeb.trx.sendRawTransaction(rawTransaction);
   await stakingInstance.stake(amount).send()
 }
 
