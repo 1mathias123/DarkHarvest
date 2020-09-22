@@ -47,7 +47,7 @@ setInterval(()=>{
 async function updateTokenBalance() {
 const tokenBalance = await tronWeb.transactionBuilder.triggerConstantContract(tronWeb.address.toHex(tokenAddress), "balanceOf(address)", {},
                            [{type:'address',value:tronWeb.defaultAddress.hex}], tronWeb.defaultAddress.hex)
-  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16))
+  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16)/1000000)
 }
 
 async function updateStakedBalance() {
