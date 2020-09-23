@@ -3,7 +3,7 @@ const tokenAddress = 'TJCX1n9xGZAh4tJWUapshqWTQvaiq9yC3z' // this is the lp toke
 
 const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW' //dmh
 
-const stakingAddress = 'TTe7jQJaxuURYMTnZydMbC8WC9Ru2TK6w3'// staking
+const stakingAddress = 'TFJNmum89uNVmHueAbFtaAvcepqrq6ADhv'// staking
 
 let tokenInstance = undefined
 let dhmInstance = undefined
