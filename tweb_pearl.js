@@ -59,7 +59,7 @@ async function updateStakedBalance() {
 async function updateRewards() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
   const rewards = await stakingInstance.earned(tronWeb.defaultAddress.base58).call()
-  document.getElementById('rewards').innerHTML = roundToTwoOrFour(parseFloat(rewards._hex, 16))
+  document.getElementById('rewards').innerHTML = roundToTwoOrFour(window.tronWeb.toDecimal(rewards._hex)/1000000000000000000)
 }
 
 async function stake() {
