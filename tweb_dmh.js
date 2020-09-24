@@ -64,7 +64,7 @@ async function updateRewards() {
 
 async function stake() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
-  const amount = document.getElementById('tokenAmount').value*100
+  const amount = document.getElementById('tokenAmount').value*1000000
   const options = {
         feeLimit:100000000,
         callValue:0,
