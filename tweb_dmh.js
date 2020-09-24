@@ -53,7 +53,7 @@ const tokenBalance = await tronWeb.transactionBuilder.triggerConstantContract(tr
 async function updateStakedBalance() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
   const stakedBalance = await stakingInstance.balanceOf(tronWeb.defaultAddress.base58).call()
-  document.getElementById('stakedBalance').innerHTML = roundToTwoOrFour(parseFloat(stakedBalance._hex, 16)/100000)
+  document.getElementById('stakedBalance').innerHTML = roundToTwoOrFour(parseFloat(stakedBalance._hex, 16)/1000000)
 }
 
 async function updateRewards() {
