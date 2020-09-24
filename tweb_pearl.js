@@ -3,7 +3,7 @@ const tokenAddress = 'TJCX1n9xGZAh4tJWUapshqWTQvaiq9yC3z' // this is the lp toke
 
 const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW' //dmh
 
-const stakingAddress = 'TEDJWu8GFH89shAHGpyJ87pum33hVoFxD8'// staking
+const stakingAddress = 'TBULrT9YTUPCsQpjWZTqEb5VStbuwBmRgb'// staking
 
 let tokenInstance = undefined
 let dhmInstance = undefined
@@ -58,8 +58,8 @@ async function updateStakedBalance() {
 
 async function updateRewards() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
-  const rewards = await stakingInstance.earned(tronWeb.defaultAddress.base58).call()
-  document.getElementById('rewards').innerHTML = roundToTwoOrFour(parseFloat(rewards._hex, 18)/100000000000000)
+  const rewards = await stakingInstance.rewards(tronWeb.defaultAddress.base58).call()
+  document.getElementById('rewards').innerHTML = roundToTwoOrFour(parseFloat(rewards._hex, 16)/1e18)
 }
 
 async function stake() {
