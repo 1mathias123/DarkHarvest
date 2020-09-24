@@ -1,9 +1,9 @@
 //contracts addresses
-const tokenAddress = 'TUEYcyPAqc4hTg1fSuBCPc18vGWcJDECVw' // this is the lp token
+const tokenAddress = 'TJCX1n9xGZAh4tJWUapshqWTQvaiq9yC3z' // this is the lp token
 
 const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW' //dmh
 
-const stakingAddress = 'TX8jkmYGTgfwgYZXffbKh7m4sRTRbZBRmr'// staking
+const stakingAddress = 'TPGJ1qof4bNrQbtnJ1eXbwJQ4tUcqfyQ3E'// staking
 
 let tokenInstance = undefined
 let dhmInstance = undefined
