@@ -1,5 +1,5 @@
 //contracts addresses
-const tokenAddress = 'TJCX1n9xGZAh4tJWUapshqWTQvaiq9yC3z' // this is the lp token
+const tokenAddress = 'TUEYcyPAqc4hTg1fSuBCPc18vGWcJDECVw' // this is the lp token
 
 const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW' //dmh
 
