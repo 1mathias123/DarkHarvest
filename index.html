@@ -205,9 +205,6 @@ let Token = await tronWeb.contract().at(contractAddress2);
     document.getElementById("balof").innerHTML=roundToFour(_balof/1000000000000000000);
   
    
-  let _price= await MyContract.tokenPrice().call(); 
-    document.getElementById("price").innerHTML=roundToFour(_price/1000000);
-
   
   
   let _matterbalance= await MyContract.getTokenBalance().call(); 
