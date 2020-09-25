@@ -155,6 +155,111 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+var started=0;	
+
+
+function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+				vars[key] = value;
+			});
+	return vars;
+}
+	
+
+function roundToFour(num) {
+	return +(Math.floor(num + "e+4") + "e-4");
+}
+function roundToTwo(num) {
+	return +(Math.floor(num + "e+2") + "e-2");
+}
+function round(num) {
+	return +(Math.floor(num + "e+0") + "e-0");
+}
+  
+
+var contractAddress='TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW';
+var contractAddress2='TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW';
+
+
+  var toinvest=0;
+  var myaddress;
+
+
+
+
+    
+async function start() {
+started=1;
+  
+let MyContract = await tronWeb.contract().at(contractAddress);
+let Token = await tronWeb.contract().at(contractAddress2);
+
+	
+  let _balof= await Token.balanceOf(myaddress).call(); 
+    document.getElementById("balof").innerHTML=roundToFour(_balof/1000000000000000000);
+  
+   
+  let _price= await MyContract.tokenPrice().call(); 
+    document.getElementById("price").innerHTML=roundToFour(_price/1000000);
+
+  
+  
+  let _matterbalance= await MyContract.getTokenBalance().call(); 
+    document.getElementById("available").innerHTML=roundToTwo(_matterbalance/1000000000000000000);
+
+
+ 
+}
+    
+   async function invest() {
+	if(started>0){	
+
+    var tosend = parseFloat(document.getElementsByName('ETH')[0].value*1000000);
+
+if(tosend>=10000000){
+	
+  let contractInstance = await tronWeb.contract().at(contractAddress);
+	
+	let args = {
+		callValue: window.tronWeb.toHex(round(tosend)),
+      	feeLimit: 10000000,
+		shouldPollResponse: true
+	};
+      
+let result = await contractInstance.buy().send(args);
+      start();
+} else alert('Minimum Investment is 10 TRX');
+} else alert ('Please unlock your Tron Wallet');
+}
+      
+    
+ 
+      
+    
+   
+    
+    
+    
+    
+accountInterval2 = setInterval(function () {
+  if(myaddress==false&&tronWeb.defaultAddress.base58 != false) location.reload();
+    
+    if(myaddress!=tronWeb.defaultAddress.base58){
+        myaddress = tronWeb.defaultAddress.base58;
+			
+}
+  
+	if (typeof window.tronWeb !== 'undefined'){		
+
+  if(tronWeb.defaultAddress.base58 != false){
+document.getElementById("installmetamask").style.display = "none";
+  console.log('started');
+   start();
+}}
+}, 2000);   
+  </script>
 </body>
 
 </html>
