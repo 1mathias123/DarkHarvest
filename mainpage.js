@@ -43,13 +43,13 @@ setInterval(()=>{
 
 async function dmhwithdraw() {
   dmhaddress = await tronWeb.contract().at(dmhaddress)
-  const rewards0 = await stakingInstance.earned(tronWeb.defaultAddress.base58).call()
+  const rewards0 = await dmhaddress.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards0').innerHTML = roundToTwoOrFour(parseFloat(rewards0._hex, 16)/1e18)
 }
 
 async function sunwithdraw() {
   sunaddress = await tronWeb.contract().at(sunaddress)
-  const rewards1 = await stakingInstance.earned(tronWeb.defaultAddress.base58).call()
+  const rewards1 = await sunaddress.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards1').innerHTML = roundToTwoOrFour(parseFloat(rewards1._hex, 16)/1e18)
 }
 
