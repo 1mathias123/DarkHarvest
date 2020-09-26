@@ -2,7 +2,7 @@ let sunaddress = 'TTYjHyHmGV7d2nUwePjLuVWHT5A3oc1h8x'
 
 let dmhaddress = 'TQvVEQiqersQn9BtAXQD6Xv1n7JHhNdHwb'
 
-let tewkenaddress = 'THZ8PR5sB79qG7K2t9nxZRwSAdS43TjTgx'
+let tewkenaddress = 'TNt2fqwH7kC7WUTnSYTTpoe3obTXBnYdFr'
 
 
 //rounding functions
