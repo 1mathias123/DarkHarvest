@@ -1,10 +1,7 @@
+let sunaddress = 'TUzSPnHR66yPj4Qc4KzKnaDqDp67jqDfJn'
 
-const sunaddress = 'TUzSPnHR66yPj4Qc4KzKnaDqDp67jqDfJn'
+let dmhaddress = 'TKV1ZampzDNaWtLwH31BkcKB4GyCwK8Pjc'
 
-const dmhaddress = 'TKV1ZampzDNaWtLwH31BkcKB4GyCwK8Pjc'
-
-let sunaddress = undefined
-let dmhaddress = undefined
 
 //rounding functions
 function parseFloat(str, radix) {
@@ -52,4 +49,3 @@ async function sunwithdraw() {
   const rewards1 = await sunaddress.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards1').innerHTML = roundToTwoOrFour(parseFloat(rewards1._hex, 16)/1e18)
 }
-
