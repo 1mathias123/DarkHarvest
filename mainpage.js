@@ -35,8 +35,6 @@ function roundToTwoOrFour(num){
 
 //updateHTML
 setInterval(()=>{
-   updateTokenBalance()
-   updateStakedBalance()
    dmhwithdraw()
    sunwithdraw()
 }, 5000) //updates every 5000 miliseconds = 5 seconds, slow it down if your having node issues
@@ -44,13 +42,13 @@ setInterval(()=>{
 
 
 async function dmhwithdraw() {
-  stakingInstance = await tronWeb.contract().at(dmhaddress)
+  dmhaddress = await tronWeb.contract().at(dmhaddress)
   const rewards0 = await stakingInstance.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards0').innerHTML = roundToTwoOrFour(parseFloat(rewards0._hex, 16)/1e18)
 }
 
 async function sunwithdraw() {
-  stakingInstance = await tronWeb.contract().at(sunaddress)
+  sunaddress = await tronWeb.contract().at(sunaddress)
   const rewards1 = await stakingInstance.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards1').innerHTML = roundToTwoOrFour(parseFloat(rewards1._hex, 16)/1e18)
 }
