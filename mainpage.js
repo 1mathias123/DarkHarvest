@@ -1,6 +1,6 @@
-let sunaddress = 'TUzSPnHR66yPj4Qc4KzKnaDqDp67jqDfJn'
+let sunaddress = 'TTYjHyHmGV7d2nUwePjLuVWHT5A3oc1h8x'
 
-let dmhaddress = 'TKV1ZampzDNaWtLwH31BkcKB4GyCwK8Pjc'
+let dmhaddress = 'TQvVEQiqersQn9BtAXQD6Xv1n7JHhNdHwb'
 
 
 //rounding functions
