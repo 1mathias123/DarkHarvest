@@ -2,6 +2,8 @@ let sunaddress = 'TTYjHyHmGV7d2nUwePjLuVWHT5A3oc1h8x'
 
 let dmhaddress = 'TQvVEQiqersQn9BtAXQD6Xv1n7JHhNdHwb'
 
+let tewkenaddress = 'THZ8PR5sB79qG7K2t9nxZRwSAdS43TjTgx'
+
 
 //rounding functions
 function parseFloat(str, radix) {
@@ -48,4 +50,10 @@ async function sunwithdraw() {
   sunaddress = await tronWeb.contract().at(sunaddress)
   const rewards1 = await sunaddress.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards1').innerHTML = roundToTwoOrFour(parseFloat(rewards1._hex, 16)/1e18)
+}
+
+async function tewkenwithdraw() {
+  tewkenaddress = await tronWeb.contract().at(sunaddress)
+  const rewards2 = await tewkenaddress.earned(tronWeb.defaultAddress.base58).call()
+  document.getElementById('rewards2').innerHTML = roundToTwoOrFour(parseFloat(rewards2._hex, 16)/1e18)
 }
