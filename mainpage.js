@@ -53,7 +53,7 @@ async function sunwithdraw() {
 }
 
 async function tewkenwithdraw() {
-  tewkenaddress = await tronWeb.contract().at(sunaddress)
+  tewkenaddress = await tronWeb.contract().at(tewkenaddress)
   const rewards2 = await tewkenaddress.earned(tronWeb.defaultAddress.base58).call()
   document.getElementById('rewards2').innerHTML = roundToTwoOrFour(parseFloat(rewards2._hex, 16)/1e18)
 }
