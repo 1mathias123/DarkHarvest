@@ -1,5 +1,5 @@
 //contracts addresses
-const tokenAddress = 'TPpLkxGeKragRC7qpiQjjtNmf6shXWi8i9'
+const tokenAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'
 
 const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'
 
