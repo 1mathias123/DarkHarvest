@@ -5,6 +5,8 @@ const dhmAddress = 'TGAuyPkfBYfA8ZVEQqboaNK1iStJokgnnW'
 
 const stakingAddress = 'TBoGNAYWksv7ez7GdyAKMgZEfLtgbx2Ax3'
 
+const tokenDecimals = 1e6
+
 let tokenInstance = undefined
 let dhmInstance = undefined
 let stakingInstance = undefined
@@ -47,7 +49,7 @@ setInterval(()=>{
 async function updateTokenBalance() {
 const tokenBalance = await tronWeb.transactionBuilder.triggerConstantContract(tronWeb.address.toHex(tokenAddress), "balanceOf(address)", {},
                            [{type:'address',value:tronWeb.defaultAddress.hex}], tronWeb.defaultAddress.hex)
-  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16)/1e6)
+  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16)/1e18)
 }
 
 async function updateStakedBalance() {
@@ -73,7 +75,7 @@ async function updateNextPayout() {
     var minutes = Math.floor((timeLeft / 1000 / 60) % 60);
     var hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
     timeLeft = timeLeft - 1000
-    document.getElementById('time-left').innerHTML = `${('0'+hours).slice(-2)}:${('0'+minutes).slice(-2)}:${('0'+seconds).slice(-2)}`
+    document.getElementById('time-left').innerHTML = ${('0'+hours).slice(-2)}:${('0'+minutes).slice(-2)}:${('0'+seconds).slice(-2)}
   },1000)
 }
 
@@ -89,7 +91,7 @@ async function apy() {
 async function stake() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
   let amount = document.getElementById('tokenAmount').value
-  amount = amount * 100000
+  amount = amount * tokenDecimals
   const options = {
         feeLimit:100000000,
         callValue:0,
@@ -104,11 +106,11 @@ async function stake() {
 async function unstake() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
   const amount = document.getElementById('tokenAmount').value
-  await stakingInstance.withdraw(amount).send()
+  await stakingInstance.withdraw(amount*tokenDecimals).send()
 }
 
 async function harvest() {
-  stakingInstance = await tronWeb.contract().at(stakingAddress)
+stakingInstance = await tronWeb.contract().at(stakingAddress)
   await stakingInstance.payout().send()
 }
 $(document).ready(function() {
