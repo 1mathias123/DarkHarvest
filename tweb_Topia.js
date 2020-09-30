@@ -47,13 +47,13 @@ setInterval(()=>{
 async function updateTokenBalance() {
 const tokenBalance = await tronWeb.transactionBuilder.triggerConstantContract(tronWeb.address.toHex(tokenAddress), "balanceOf(address)", {},
                            [{type:'address',value:tronWeb.defaultAddress.hex}], tronWeb.defaultAddress.hex)
-  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16)/1000000)
+  document.getElementById('tokenBalance').innerHTML = roundToTwoOrFour(parseFloat(tokenBalance.constant_result[0],16)/100000000)
 }
 
 async function updateStakedBalance() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
   const stakedBalance = await stakingInstance.balanceOf(tronWeb.defaultAddress.base58).call()
-  document.getElementById('stakedBalance').innerHTML = roundToTwoOrFour(parseFloat(stakedBalance._hex, 16)/1000000)
+  document.getElementById('stakedBalance').innerHTML = roundToTwoOrFour(parseFloat(stakedBalance._hex, 16)/100000000)
 }
 
 async function updateRewards() {
@@ -64,7 +64,7 @@ async function updateRewards() {
 
 async function stake() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
-  const amount = document.getElementById('tokenAmount').value*1000000
+  const amount = document.getElementById('tokenAmount').value*100000000
   const options = {
         feeLimit:100000000,
         callValue:0,
