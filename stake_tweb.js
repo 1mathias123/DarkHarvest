@@ -75,7 +75,7 @@ async function updateNextPayout() {
     var minutes = Math.floor((timeLeft / 1000 / 60) % 60);
     var hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
     timeLeft = timeLeft - 1000
-    document.getElementById('time-left').innerHTML = ${('0'+hours).slice(-2)}:${('0'+minutes).slice(-2)}:${('0'+seconds).slice(-2)}
+    document.getElementById('time-left').innerHTML = `${('0'+hours).slice(-2)}:${('0'+minutes).slice(-2)}:${('0'+seconds).slice(-2)}`
   },1000)
 }
 
@@ -110,7 +110,7 @@ async function unstake() {
 }
 
 async function harvest() {
-stakingInstance = await tronWeb.contract().at(stakingAddress)
+  stakingInstance = await tronWeb.contract().at(stakingAddress)
   await stakingInstance.payout().send()
 }
 $(document).ready(function() {
