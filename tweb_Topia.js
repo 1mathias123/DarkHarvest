@@ -78,7 +78,7 @@ async function stake() {
 
 async function unstake() {
   stakingInstance = await tronWeb.contract().at(stakingAddress)
-  const amount = document.getElementById('tokenAmount').value*1000000
+  const amount = document.getElementById('tokenAmount').value*100000000
   await stakingInstance.withdraw(amount).send()
 }
 
